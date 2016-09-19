@@ -1,12 +1,11 @@
 import java.io.IOException;
 import java.net.*;
-import java.util.Collections;
-import java.util.Enumeration;
 
 /**
  * Created by pavel on 12/09/16.
+ * Interfaz del servidor para sockets
  */
-public class Server {
+class Server {
     /**
      * Configuramos el estado del servidor con estas dos constantes y la variable que lo controla
      * Seguiremos escuchando al cliente mientras ServerStatus tenga el estado SERVER_ON

@@ -11,7 +11,7 @@ class SocketUtils {
     /**
      * Entrada de consola
      */
-    static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    static final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
     static void sendMessage(Socket socket, String message) throws IOException {
         try {
@@ -52,7 +52,7 @@ class SocketUtils {
         }
     }
 
-    static String executeCommand(String command, Socket socket) {
+    static String executeCommand(String command) {
         StringBuilder out = new StringBuilder();
         try {
             Process p = Runtime.getRuntime().exec(command);

@@ -6,7 +6,7 @@ import java.net.Socket;
  * Controla la lógica de cada hilo de ejecución del servior concurrente
  */
 class ThreadServer extends Thread {
-    private Socket skRequest;
+    private final Socket skRequest;
 
     ThreadServer(Socket socket) {
         skRequest = socket;
@@ -18,7 +18,7 @@ class ThreadServer extends Thread {
             System.out.println("inputCommand = " + inputCommand);
             Thread.sleep(2000);
             System.setOut(new PrintStream(skRequest.getOutputStream()));
-            System.out.println(SocketUtils.executeCommand(inputCommand, skRequest));
+            System.out.println(SocketUtils.executeCommand(inputCommand));
             System.out.println("Command executed");
             SocketUtils.sendMessage(skRequest,inputCommand.toUpperCase());
             skRequest.close();

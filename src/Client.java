@@ -1,15 +1,14 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
  * Created by pavel on 12/09/16.
+ * Interfaz del cliente para sockets
  */
-public class Client {
+class Client {
     public static void main(String[] args) {
         //Obtenemos la dirección IP y el puerto al que queremos conectarnos
-        String serverIP = new String();
+        String serverIP = "";
         int serverPort = -1;
         if (args.length != 2) {
             try {

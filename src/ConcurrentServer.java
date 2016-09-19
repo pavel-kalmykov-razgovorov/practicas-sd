@@ -4,8 +4,9 @@ import java.net.Socket;
 
 /**
  * Created by pavel on 15/09/16.
+ * Versión del servidor concurrente. Cada petición será un hilo de ejecución
  */
-public class ConcurrentServer {
+class ConcurrentServer {
     public static void main(String[] args) {
         SocketUtils.displayIPAdresses();
         //Obtenemos el puerto en el que queremos comenzar a escuchar
