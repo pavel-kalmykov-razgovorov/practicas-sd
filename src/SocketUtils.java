@@ -1,5 +1,7 @@
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
+import java.util.Collections;
+import java.util.Enumeration;
 
 /**
  * Created by pavel on 13/09/16.
@@ -30,5 +32,43 @@ public class SocketUtils {
             System.err.println("Error: unable to read stream from client");
             throw new IOException();
         }
+    }
+
+    /**
+     * Selecciona todas las IP's que tiene el equipo y las muestra (sólo en formato IPV4)
+     */
+    public static void displayIPAdresses() {
+        try {
+            Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces(); //Recibe todas las interfaces de red
+            System.out.println("Available IP's at this machine");
+            for (NetworkInterface network : Collections.list(networks)) {
+                Enumeration<InetAddress> networkadresses = network.getInetAddresses(); //Recibe todas las direcciones de cada interfaz
+                //Hacemos un filter de las IP's para quedarnos sólo con las IPV4 y las mostramos
+                Collections.list(networkadresses).stream().filter(adress -> adress instanceof Inet4Address).forEach(adress -> {
+                    System.out.println("\t" + adress);
+                });
+            }
+        } catch (SocketException e) {
+            System.err.println("Error: unable to display available IP's");
+        }
+    }
+
+    public static String executeCommand(String command, Socket socket) {
+        StringBuffer out = new StringBuffer();
+        try {
+            System.setOut(new PrintStream(socket.getOutputStream()));
+            Process p = Runtime.getRuntime().exec(command);
+            p.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            char c;
+            while ((c = (char) reader.read()) != '\uFFFF') {
+                out.append(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return out.toString();
     }
 }

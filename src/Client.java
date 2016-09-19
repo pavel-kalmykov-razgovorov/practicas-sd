@@ -35,7 +35,7 @@ public class Client {
             System.out.println("Response: " + SocketUtils.receiveMessage(skClient));
             skClient.close();
         } catch (IOException e) {
-            System.err.println("Error: connection closed with client at port " + serverPort);
+            System.err.println("Error: unable to connect");
         }
     }
 }
